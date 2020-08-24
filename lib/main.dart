@@ -5,38 +5,30 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Widget _buildDecoratedImage(int imgIndex) => Expanded(
-            child: Container(
-          decoration: BoxDecoration(
-            border: Border.all(width: 10, color: Colors.black38),
-            borderRadius: const BorderRadius.all(Radius.circular(8)),
-          ),
-          margin: EdgeInsets.all(8),
-          child: Image.asset('assets/images/love_$imgIndex.jpg'),
-        ));
-    Widget _buildImageRow(int imgIndex) => Row(
-          children: [
-            _buildDecoratedImage(imgIndex),
-            _buildDecoratedImage(imgIndex + 1)
-          ],
-        );
-    Widget _buildImageColumn() => Container(
-          //change background
-          decoration: BoxDecoration(color: Colors.green),
-          child: Column(
-            children: [_buildImageRow(1), _buildImageRow(3)],
-          ),
-        );
-    List<Container> _buildGridTile(int count) => List.generate(count,
-        (i) =>Container(
-          child: Image.asset('assets/images/love_$i.jpg')
-        )
-       );
-    Widget _buildGrid() => GridView.extent(maxCrossAxisExtent: 200,
-      padding: const EdgeInsets.all(4),
-      mainAxisSpacing: 20,
-      crossAxisSpacing: 4,
-      children: _buildGridTile(6),
+    Widget _tile(String title, String subTitle,IconData icon) => ListTile(
+      title: Text(title,style: TextStyle(
+        fontSize: 18,
+        fontWeight: FontWeight.w800
+      ),),
+      subtitle: Text(subTitle),
+      leading: Icon(icon,color: Colors.red),
+      trailing: Icon(Icons.markunread,color: Colors.amber,)
+    );
+    Widget _buildList() => ListView(
+      children: [
+        _tile('CineArts at the Empire', '85 W Portal Ave', Icons.theaters),
+        _tile('The Castro Theater', '429 Castro St', Icons.theaters),
+        _tile('Alamo Drafthouse Cinema', '2550 Mission St', Icons.theaters),
+        _tile('Roxie Theater', '3117 16th St', Icons.theaters),
+        _tile('United Artists Stonestown Twin', '501 Buckingham Way', Icons.theaters),
+        _tile('AMC Metreon 16', '135 4th St #3000', Icons.theaters),
+        Divider(),
+        _tile('Kescaped_code#39;s Kitchen', '757 Monterey Blvd', Icons.restaurant),
+        _tile('Emmyescaped_code#39;s Restaurant', '1923 Ocean Ave', Icons.restaurant),
+        _tile(
+            'Chaiya Thai Restaurant', '272 Claremont Blvd', Icons.restaurant),
+        _tile('La Ciccia', '291 30th St', Icons.restaurant),
+      ],
     );
     return MaterialApp(
       title: 'Flutter Layouts Demo',
@@ -44,7 +36,7 @@ class MyApp extends StatelessWidget {
           appBar: AppBar(
             title: Text('Flutter Layouts Demo'),
           ),
-          body: _buildGrid(),
+          body: _buildList(),
       )
     );
   }
