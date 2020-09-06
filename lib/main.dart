@@ -11,7 +11,6 @@ import 'package:flutter_layouts/todo/ToDoMainScreen.dart';
 import 'package:flutter_layouts/todo/Todo.dart';
 
 void main() => runApp(MyApp());
-
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
